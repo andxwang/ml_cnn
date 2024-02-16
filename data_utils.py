@@ -31,15 +31,14 @@ def create_cifar10_dataloader(batch_size, shuffle=True):
         transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
     ])
 
-    trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
+    trainset = torchvision.datasets.CIFAR10(root='../datasets/cifar-10', train=True,
                                             download=True, transform=transform)
-    trainloader = DataLoader(trainset, batch_size=batch_size, shuffle=shuffle)
+    trainloader = DataLoader(trainset, batch_size=batch_size, shuffle=True)
 
-    testset = torchvision.datasets.CIFAR10(root='./data', train=False,
+    testset = torchvision.datasets.CIFAR10(root='../datasets/cifar-10', train=False,
                                            download=True, transform=transform)
-    testloader = DataLoader(testset, batch_size=batch_size, shuffle=shuffle)
+    testloader = DataLoader(testset, batch_size=batch_size, shuffle=False)
 
-    classes = ('plane', 'car', 'bird', 'cat',
-               'deer', 'dog', 'frog', 'horse', 'ship', 'truck')  # TODO: change to use class id method
+    classes = trainset.classes
 
     return trainloader, testloader, classes
